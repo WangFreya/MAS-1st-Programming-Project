@@ -7,6 +7,6 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Spotify Music App</string>
-    <string name="hello_second_fragment">Spotify Music App Testing.. Arg: %1$s</string>
+    <string name="hello_first_fragment">Wiki Search</string>
+    <string name="conclusion">Thank you!</string>
 </resources>
