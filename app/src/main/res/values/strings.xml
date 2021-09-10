@@ -9,4 +9,7 @@
 
     <string name="hello_first_fragment">Wiki Search</string>
     <string name="conclusion">Thank you!</string>
+    <string name="title">Wiki Search Form</string>
+    <string name="name">Name</string>
+    <string name="num">Number</string>
 </resources>
