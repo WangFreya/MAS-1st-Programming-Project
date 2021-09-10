@@ -24,7 +24,15 @@
         android:name="com.example.mas1stprogrammingassignment.FormFragment"
         android:label="FormFragment" >
         <action
-            android:id="@+id/action_formFragment_to_SecondFragment"
+            android:id="@+id/action_formFragment_to_displayFragment"
+            app:destination="@id/displayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/displayFragment"
+        android:name="com.example.mas1stprogrammingassignment.DisplayFragment"
+        android:label="DisplayFragment" >
+        <action
+            android:id="@+id/action_displayFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>
