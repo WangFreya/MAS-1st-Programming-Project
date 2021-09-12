@@ -8,6 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.form.*
 
 /**
@@ -19,6 +21,7 @@ class FormFragment : Fragment() {
     private var age = 0;
     private var searchText = ""
     private var usedWikiBefore = ""
+    val db = Firebase.firestore
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +36,37 @@ class FormFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_submit).setOnClickListener {
-            this.fullName = name.text.toString()
-            this.age = ageOfUser.text.toString().toInt()
-            this.searchText= multiLine.text.toString()
-            this.usedWikiBefore = usedWiki.text.toString()
+            fullName = name.text.toString()
+            age = ageOfUser.text.toString().toInt()
+            searchText= multiLine.text.toString()
+            usedWikiBefore = usedWiki.text.toString()
+
+            val user = hashMapOf(
+                    "name" to fullName,
+                    "age" to this.age,
+                    "usedWikiBefore?" to usedWikiBefore,
+                    "textToSearch" to searchText
+            )
+
+            db.collection("users")
+                    .get()
+                    .addOnSuccessListener { result ->
+                        for (document in result) {
+                            Log.i("See Data", "${document.id} => ${document.data}")
+                        }
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.i("No data", "Error getting documents.", exception)
+                    }
+
+            db.collection("users")
+                    .add(user)
+                    .addOnSuccessListener { documentReference ->
+                        Log.d("No Error", "DocumentSnapshot added with ID: ${documentReference.id}")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("Error", "Error adding document", e)
+                    }
 
             findNavController().navigate(R.id.action_formFragment_to_displayFragment)
         }
