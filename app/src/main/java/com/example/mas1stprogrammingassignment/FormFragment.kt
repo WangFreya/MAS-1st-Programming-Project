@@ -48,6 +48,8 @@ class FormFragment : Fragment() {
                     "textToSearch" to searchText
             )
 
+            // Handle unexpected text here?
+            
             db.collection("users")
                     .get()
                     .addOnSuccessListener { result ->
